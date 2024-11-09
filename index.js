@@ -3,45 +3,41 @@ import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 const canvas = document.getElementById("canvas");
 const renderer = new SPLAT.WebGLRenderer(canvas);
 const scene = new SPLAT.Scene();
-const camera = new SPLAT.Camera(); // Default camera with position already set
+const camera = new SPLAT.Camera();
 const controls = new SPLAT.OrbitControls(camera, canvas);
 
-async function loadSplatFile(url) {
-  // Clear the current scene
+// List of splat URLs
+const splatFiles = [
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka.splat",
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium_small.splat"
+];
+
+// Function to load a new .splat file into the scene
+async function loadSplat(url) {
+  // Clear existing objects in the scene
   scene.clear();
 
-  // Load the new splat file into the scene
+  // Load the new .splat file
   await SPLAT.Loader.LoadAsync(url, scene, null);
 }
 
-async function main() {
-  const initialUrl =
-    "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat";
-
-  // Load the initial splat file
-  await loadSplatFile(initialUrl);
-
-  const handleResize = () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  };
-
+// Function to initialize the animation
+function startAnimation() {
   const frame = () => {
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(frame);
   };
 
-  handleResize();
-  window.addEventListener("resize", handleResize);
   requestAnimationFrame(frame);
-
-  // Add an event listener to the button to load a new splat file
-  document.getElementById("loadButton").addEventListener("click", async () => {
-    const newUrl = prompt("Enter the URL of the new .splat file:");
-    if (newUrl) {
-      await loadSplatFile(newUrl);
-    }
-  });
 }
 
-main();
+// Function to handle button clicks for loading different splats
+function handleButtonClick(index) {
+  loadSplat(splatFiles[index]);
+}
+
+// Initialize and load the first splat
+loadSplat(splatFiles[0]);
+startAnimation();
