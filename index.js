@@ -10,7 +10,7 @@ let controls = new SPLAT.OrbitControls(camera, canvas); // Initialize controls
 const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka.splat",
-  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium_small.splat"
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium2.splat"
 ];
 
 // Track the current splat file index, starting with the first one
