@@ -23,9 +23,9 @@ async function loadSplat(url) {
 }
 
 // Function to handle button clicks for loading different splats
-export function handleButtonClick(index) {
+window.handleButtonClick = function(index) {
   loadSplat(splatFiles[index]);
-}
+};
 
 // Function to initialize the animation
 function startAnimation() {
