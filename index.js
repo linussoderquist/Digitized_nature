@@ -9,9 +9,8 @@ const controls = new SPLAT.OrbitControls(camera, canvas);
 
 async function main() {
     // URL till din `.ply`-fil
-    #const url = "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply";
-    const url = "https://raw.githubusercontent.com/willeastcott/assets/main/dragon.compressed.ply";
-
+    const url = "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat";
+    
     // Ladda filen till scenen
     await SPLAT.Loader.LoadAsync(url, scene, null);
 
