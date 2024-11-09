@@ -9,8 +9,6 @@ const controls = new SPLAT.OrbitControls(camera, canvas);
 
 async function main() {
     const url =  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply";
-
-    // Ladda filen till scenen
     await SPLAT.Loader.LoadAsync(url, scene, null);
 
     const handleResize = () => {
