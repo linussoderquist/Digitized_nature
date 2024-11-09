@@ -17,7 +17,15 @@ async function main() {
     const url = "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply";
 
     // Ladda filen och lägg till den i scenen
-    await SPLAT.Loader.LoadAsync(url, scene, null);
+    const model = await SPLAT.Loader.LoadAsync(url, scene, null);
+
+    // Om modellen laddades in, skala upp den (exempelvis 10 gånger) för bättre synlighet
+    if (model) {
+        model.scale.set(10, 10, 10);  // Testa olika skalor för att se modellen bättre
+        scene.add(model);
+    } else {
+        console.error("Modellen kunde inte laddas.");
+    }
 
     // Justera skärmstorlek och canvas
     const handleResize = () => {
