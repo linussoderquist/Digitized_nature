@@ -9,7 +9,7 @@ const camera = new SPLAT.Camera();
 const controls = new SPLAT.OrbitControls(camera, canvas);
 
 // Justera kamera för att få en bra vy
-camera.position.set(0, 0, 50);  // Ställ kameran en bit bak för att se hela objektet
+camera.position.set(0, 0, 500);  // Ställ kameran en bit bak för att se hela objektet
 
 // Funktion för att hantera filinladdning och rendering
 async function main() {
