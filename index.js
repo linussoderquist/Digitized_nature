@@ -2,27 +2,40 @@ import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 
 const canvas = document.getElementById("canvas");
 const renderer = new SPLAT.WebGLRenderer(canvas);
-let scene = new SPLAT.Scene();  // Declare `scene` as a `let` so it can be reassigned
+const scene = new SPLAT.Scene();  // Use a consistent scene instance
 const camera = new SPLAT.Camera();
-let controls = new SPLAT.OrbitControls(camera, canvas); // Declare `controls` as a `let`
+const controls = new SPLAT.OrbitControls(camera, canvas);
 
 // List of splat URLs
 const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka.splat",
-  "https://drive.google.com/uc?export=download&id=18uLohvlkL8zXL3fEHC8qPJuEDjyyFmbJ"
+  // NOTE: Google Drive URLs may not work directly as sources. Test with another .splat file.
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium_small.splat"
 ];
 
 // Track the current splat file index, starting with the first one
 let currentSplatIndex = 0;
 
+// Function to clear the scene manually by removing each child
+function clearScene() {
+  while (scene.children.length > 0) {
+    const object = scene.children[0];
+    scene.remove(object);
+
+    // Dispose of geometry and material to free memory
+    if (object.geometry) object.geometry.dispose();
+    if (object.material) object.material.dispose();
+  }
+  console.log("Scene cleared.");
+}
+
 // Function to load a new .splat file into the scene
 async function loadSplat(url) {
   console.log(`Loading .splat file from URL: ${url}`);
 
-  // Reset the scene and controls
-  scene = new SPLAT.Scene();
-  controls = new SPLAT.OrbitControls(camera, canvas); // Recreate controls for the new scene
+  // Clear the scene manually
+  clearScene();
 
   // Load the new .splat file
   try {
@@ -38,7 +51,7 @@ window.handleButtonClick = function() {
   // Increment the index and wrap around if needed
   currentSplatIndex = (currentSplatIndex + 1) % splatFiles.length;
 
-  // Load the new splat file with a new scene
+  // Load the new splat file
   loadSplat(splatFiles[currentSplatIndex]);
 };
 
