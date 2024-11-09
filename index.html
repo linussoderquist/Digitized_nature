@@ -26,13 +26,20 @@
         light.position.set(1, 1, 1).normalize();
         scene.add(light);
 
-        // Load PLY Model
+        // Load PLY Model with error handling
         const loader = new THREE.PLYLoader();
-        loader.load('https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply', function (geometry) {
-            const material = new THREE.PointsMaterial({ size: 0.005, color: 0xFFFFFF });
-            const mesh = new THREE.Points(geometry, material);
-            scene.add(mesh);
-        });
+        loader.load(
+            'https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply',
+            function (geometry) {
+                const material = new THREE.PointsMaterial({ size: 0.005, color: 0xFFFFFF });
+                const mesh = new THREE.Points(geometry, material);
+                scene.add(mesh);
+            },
+            undefined,
+            function (error) {
+                console.error('An error occurred while loading the PLY file:', error);
+            }
+        );
 
         // Camera positioning
         camera.position.z = 5;
