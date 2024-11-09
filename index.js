@@ -22,6 +22,11 @@ async function loadSplat(url) {
   await SPLAT.Loader.LoadAsync(url, scene, null);
 }
 
+// Function to handle button clicks for loading different splats
+export function handleButtonClick(index) {
+  loadSplat(splatFiles[index]);
+}
+
 // Function to initialize the animation
 function startAnimation() {
   const frame = () => {
@@ -31,11 +36,6 @@ function startAnimation() {
   };
 
   requestAnimationFrame(frame);
-}
-
-// Function to handle button clicks for loading different splats
-function handleButtonClick(index) {
-  loadSplat(splatFiles[index]);
 }
 
 // Initialize and load the first splat
