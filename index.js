@@ -2,9 +2,9 @@ import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 
 const canvas = document.getElementById("canvas");
 const renderer = new SPLAT.WebGLRenderer(canvas);
-const scene = new SPLAT.Scene();
+let scene = new SPLAT.Scene();  // Declare `scene` as a `let` so it can be reassigned
 const camera = new SPLAT.Camera();
-const controls = new SPLAT.OrbitControls(camera, canvas);
+let controls = new SPLAT.OrbitControls(camera, canvas); // Declare `controls` as a `let`
 
 // List of splat URLs
 const splatFiles = [
@@ -13,19 +13,37 @@ const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium_small.splat"
 ];
 
+// Track the current splat file index, starting with the first one
+let currentSplatIndex = 0;
+
 // Function to load a new .splat file into the scene
 async function loadSplat(url) {
-  // Clear existing objects in the scene
-  scene.clear();
+  console.log(`Loading .splat file from URL: ${url}`);
+
+  // Reset the scene and controls
+  scene = new SPLAT.Scene();
+  controls = new SPLAT.OrbitControls(camera, canvas); // Recreate controls for the new scene
 
   // Load the new .splat file
-  await SPLAT.Loader.LoadAsync(url, scene, null);
+  try {
+    await SPLAT.Loader.LoadAsync(url, scene, null);
+    console.log(".splat file loaded successfully.");
+  } catch (error) {
+    console.error("Error loading .splat file:", error);
+  }
 }
 
-// Function to handle button clicks for loading different splats
-window.handleButtonClick = function(index) {
-  loadSplat(splatFiles[index]);
-};
+// Function to handle button clicks to cycle through splats
+function handleButtonClick() {
+  // Increment the index and wrap around if needed
+  currentSplatIndex = (currentSplatIndex + 1) % splatFiles.length;
+
+  // Load the new splat file with a new scene
+  loadSplat(splatFiles[currentSplatIndex]);
+}
+
+// Initialize the button's event listener
+document.getElementById("nextButton").addEventListener("click", handleButtonClick);
 
 // Function to initialize the animation
 function startAnimation() {
@@ -38,6 +56,6 @@ function startAnimation() {
   requestAnimationFrame(frame);
 }
 
-// Initialize and load the first splat
-loadSplat(splatFiles[0]);
+// Load the first splat on startup
+loadSplat(splatFiles[currentSplatIndex]);
 startAnimation();
