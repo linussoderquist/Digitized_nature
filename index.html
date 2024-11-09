@@ -5,6 +5,17 @@
     <style>
         body { margin: 0; }
         canvas { display: block; }
+        #errorMessage {
+            display: none;
+            color: red;
+            font-size: 20px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
     </style>
     <!-- Three.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -13,6 +24,8 @@
 </head>
 <body>
     <div id="viewer"></div>
+    <div id="errorMessage">Laddning av 3D-modellen misslyckades. Vänligen kontrollera filens URL eller prova igen senare.</div>
+
     <script>
         // Setup basic Three.js scene
         const scene = new THREE.Scene();
@@ -38,6 +51,7 @@
             undefined,
             function (error) {
                 console.error('An error occurred while loading the PLY file:', error);
+                document.getElementById('errorMessage').style.display = 'block';
             }
         );
 
