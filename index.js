@@ -3,13 +3,21 @@ import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 
 const canvas = document.getElementById("canvas");
 
+// Använd SPLAT:s WebGLRenderer och Scene
 const renderer = new SPLAT.WebGLRenderer(canvas);
 const scene = new SPLAT.Scene();
 
-// Använd en Three.js PerspectiveCamera istället
+// Skapa Three.js PerspectiveCamera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 10);  // Ställ in kameraavståndet
 
+// Kontrollera att kameran har skapats och dess position kan ställas in
+try {
+    camera.position.set(0, 0, 10);  // Flytta kameran bakåt
+} catch (error) {
+    console.error("Kamera-inställning misslyckades:", error);
+}
+
+// Skapa OrbitControls med kameran och canvas
 const controls = new SPLAT.OrbitControls(camera, canvas);
 
 async function main() {
@@ -18,7 +26,7 @@ async function main() {
     const model = await SPLAT.Loader.LoadAsync(url, scene, null);
 
     if (model) {
-        model.scale.set(10, 10, 10);  // Skala upp objektet för bättre synlighet
+        model.scale.set(10, 10, 10);  // Skala upp objektet
         scene.add(model);
     } else {
         console.error("Modellen kunde inte laddas.");
