@@ -28,7 +28,7 @@
 
         // Load PLY Model
         const loader = new THREE.PLYLoader();
-        loader.load('https://raw.githubusercontent.com/linussoderquist/Digitized_nature/blob/main/paludarium.compressed.ply', function (geometry) {
+        loader.load('https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium.compressed.ply', function (geometry) {
             const material = new THREE.PointsMaterial({ size: 0.005, color: 0xFFFFFF });
             const mesh = new THREE.Points(geometry, material);
             scene.add(mesh);
