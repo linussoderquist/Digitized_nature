@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Model Viewer</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Three.js PLY Loader -->
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/PLYLoader.js"></script>
+</head>
+<body>
+    <div id="viewer"></div>
+    <script>
+        // Setup basic Three.js scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Lighting
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(1, 1, 1).normalize();
+        scene.add(light);
+
+        // Load PLY Model
+        const loader = new THREE.PLYLoader();
+        loader.load('https://raw.githubusercontent.com/linussoderquist/Digitized_nature/blob/main/splats/paludarium.compressed.ply', function (geometry) {
+            const material = new THREE.PointsMaterial({ size: 0.005, color: 0xFFFFFF });
+            const mesh = new THREE.Points(geometry, material);
+            scene.add(mesh);
+        });
+
+        // Camera positioning
+        camera.position.z = 5;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+</html>
