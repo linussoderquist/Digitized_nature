@@ -10,7 +10,7 @@ let controls = new SPLAT.OrbitControls(camera, canvas); // Declare `controls` as
 const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka.splat",
-  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium_small.splat"
+  "https://drive.google.com/uc?export=download&id=18uLohvlkL8zXL3fEHC8qPJuEDjyyFmbJ"
 ];
 
 // Track the current splat file index, starting with the first one
@@ -34,16 +34,13 @@ async function loadSplat(url) {
 }
 
 // Function to handle button clicks to cycle through splats
-function handleButtonClick() {
+window.handleButtonClick = function() {
   // Increment the index and wrap around if needed
   currentSplatIndex = (currentSplatIndex + 1) % splatFiles.length;
 
   // Load the new splat file with a new scene
   loadSplat(splatFiles[currentSplatIndex]);
-}
-
-// Initialize the button's event listener
-document.getElementById("nextButton").addEventListener("click", handleButtonClick);
+};
 
 // Function to initialize the animation
 function startAnimation() {
