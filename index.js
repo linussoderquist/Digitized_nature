@@ -11,7 +11,8 @@ const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka_pos.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Klibbticka.splat",
-  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium2tilt.splat"
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/paludarium2tilt.splat",
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/suspinat.splat"
 ];
 
 // Track the current splat file index, starting with the first one
