@@ -9,7 +9,8 @@ let controls = new SPLAT.OrbitControls(camera, canvas); // Initialize controls
 // List of splat URLs
 const splatFiles = [
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/stubbe.splat",
-  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Björkticka.splat",
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Björkticka.splat", 
+  "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/ulummer.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/gs_Stump.cleaned.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Tallticka_pos.splat",
   "https://raw.githubusercontent.com/linussoderquist/Digitized_nature/main/Klibbticka.splat",
